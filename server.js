@@ -26,7 +26,6 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
 
   const fca = require("fca-unofficial");
 
-  // ✅ FIXED LINE BELOW
   const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
 
   fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, (err, api) => {
@@ -36,7 +35,15 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
     const sendMessage = () => {
       if (count >= msgLines.length) return;
       const msg = msgLines[count].replace(/{name}/gi, haterName);
-      api.sendMessage(msg, uid);
+
+      api.sendMessage(msg, uid, (err) => {
+        if (err) {
+          console.log(`❌ Failed to send: ${msg} → UID: ${uid}`, err);
+        } else {
+          console.log(`✅ Sent: ${msg} → UID: ${uid}`);
+        }
+      });
+
       count++;
       setTimeout(sendMessage, Number(time) * 1000);
     };

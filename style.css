@@ -1,47 +1,18 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-image: url('https://i.imgur.com/ieuigWe.jpeg');
-  background-size: cover;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* style.css - Rudra Multi Convo UI */
 
-.container {
-  width: 90%;
-  max-width: 400px;
-  margin: 5% auto;
-  background: rgba(0,0,0,0.6);
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px #fff;
-  color: white;
-}
+body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-image: url('https://i.imgur.com/ieuigWe.jpeg'); /* 🔁 Replace with your Imgur */ background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; display: flex; justify-content: center; align-items: center; }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #FFD700;
-  text-shadow: 0 0 10px #fff;
-}
+.container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 2px solid #fff; border-radius: 16px; padding: 30px; max-width: 420px; width: 90%; box-shadow: 0 0 25px rgba(255, 255, 255, 0.3); color: white; }
 
-input, select, button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  font-size: 16px;
-}
+h1 { text-align: center; color: #ffcc00; text-shadow: 2px 2px 6px #000; margin-bottom: 20px; }
 
-button {
-  background: #ff5722;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+input, select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; font-size: 15px; border: none; outline: none; }
 
-button:hover {
-  background: #e64a19;
-}
+input, select { background: rgba(255, 255, 255, 0.2); color: white; }
+
+input::placeholder { color: #eee; }
+
+button { background: linear-gradient(to right, #ff00cc, #3333ff); color: #fff; font-weight: bold; border: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+
+button:hover { background: linear-gradient(to right, #ff9933, #ff0000); transform: scale(1.03); box-shadow: 0 0 15px #ffcc00; }
+

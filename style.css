@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('https://i.imgur.com/H4XB4bI.jpg');
+  background-size: cover;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  margin: 5% auto;
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #fff;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #FFD700;
+  text-shadow: 0 0 10px #fff;
+}
+
+input, select, button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background: #ff5722;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #e64a19;
+}

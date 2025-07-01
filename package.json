@@ -1,0 +1,16 @@
+
+{
+  "name": "rudra-multi-convo",
+  "version": "1.0.0",
+  "description": "Facebook multi inbox sender by Rudra",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "multer": "latest",
+    "body-parser": "latest",
+    "fca-unofficial": "latest"
+  }
+}

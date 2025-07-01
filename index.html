@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RUDRA MULTI CONVO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>RUDRA MULTI CONVO</h1>
+    <form action="/send" method="POST" enctype="multipart/form-data">
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <select name="tokenOption">
+        <option value="single">Single Token</option>
+      </select>
+      <input type="text" name="token" placeholder="Enter Single Token" required>
+      <input type="text" name="uid" placeholder="Enter Inbox/convo uid" required>
+      <input type="text" name="haterName" placeholder="Enter Your Hater Name" required>
+      <input type="number" name="time" placeholder="Enter Time (seconds)" required>
+      <label>Choose Your NP File</label>
+      <input type="file" name="npFile" accept=".txt" required>
+      <button type="submit">🔥 Start Multi Convo</button>
+    </form>
+  </div>
+</body>
+</html>

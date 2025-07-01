@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const upload = multer({ dest: "uploads/" });
 
-// Only this UID can control start/stop
+// 🔒 Only this UID can control the convo
 const OWNER_UID = "61550558518720";
 let running = false;
 let intervalId = null;
@@ -25,13 +25,13 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
   }
 
   if (senderUID !== OWNER_UID) {
-    return res.status(403).send("❌ Only Owner can control the system");
+    return res.status(403).send("❌ Only Owner UID can control the convo");
   }
 
   if (control === "stop") {
     running = false;
     clearInterval(intervalId);
-    return res.send("🛑 All conversations stopped.");
+    return res.send("🛑 Messages stopped successfully.");
   }
 
   if (control === "start") {
@@ -50,9 +50,14 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
       running = true;
 
       intervalId = setInterval(() => {
-        if (!running || count >= msgLines.length) {
+        if (!running) {
           clearInterval(intervalId);
           return;
+        }
+
+        // ✅ Loop: reset to 0 when finished
+        if (count >= msgLines.length) {
+          count = 0;
         }
 
         const msg = msgLines[count].replace(/{name}/gi, haterName);
@@ -62,7 +67,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
             if (err) {
               console.log(`❌ Failed to send to ${uid}:`, err);
             } else {
-              console.log(`✅ Sent to ${uid}:`, msg);
+              console.log(`✅ Sent to ${uid}: ${msg}`);
             }
           });
         }
@@ -70,7 +75,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
         count++;
       }, Number(time) * 1000);
 
-      res.send("✅ Messages started sending to all UIDs.");
+      res.send("✅ Messages started sending in loop to all UIDs.");
     });
   } else {
     res.status(400).send("❗ Invalid control option");
@@ -78,5 +83,5 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ RUDRA MULTI CONVO Server running at PORT ${PORT}`);
+  console.log(`✅ RUDRA MULTI CONVO Server is live at PORT ${PORT}`);
 });

@@ -1,18 +1,70 @@
-/* style.css - Rudra Multi Convo UI */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://i.imgur.com/ieuigWe.jpeg') no-repeat center center fixed;
+  background-size: cover;
+}
 
-body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-image: url('https://i.imgur.com/ieuigWe.jpeg'); /* 🔁 Replace with your Imgur */ background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; display: flex; justify-content: center; align-items: center; }
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  border-radius: 25px;
+  backdrop-filter: blur(18px) brightness(1.1);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
 
-.container { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 2px solid #fff; border-radius: 16px; padding: 30px; max-width: 420px; width: 90%; box-shadow: 0 0 25px rgba(255, 255, 255, 0.3); color: white; }
+h1 {
+  text-align: center;
+  color: #ffce00;
+  font-size: 28px;
+  margin-bottom: 25px;
+  text-shadow: 0 0 5px black;
+  letter-spacing: 1px;
+}
 
-h1 { text-align: center; color: #ffcc00; text-shadow: 2px 2px 6px #000; margin-bottom: 20px; }
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+}
 
-input, select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; font-size: 15px; border: none; outline: none; }
+input::placeholder {
+  color: #ccc;
+}
 
-input, select { background: rgba(255, 255, 255, 0.2); color: white; }
+label {
+  color: #fff;
+  margin-top: 10px;
+  display: block;
+}
 
-input::placeholder { color: #eee; }
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff00cc, #3333ff);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
 
-button { background: linear-gradient(to right, #ff00cc, #3333ff); color: #fff; font-weight: bold; border: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
-
-button:hover { background: linear-gradient(to right, #ff9933, #ff0000); transform: scale(1.03); box-shadow: 0 0 15px #ffcc00; }
-
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}

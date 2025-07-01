@@ -1,4 +1,3 @@
-
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
@@ -26,11 +25,12 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
   }
 
   const fca = require("fca-unofficial");
-  const msgLines = fs.readFileSync(req.file.path, "utf-8").split("
-").filter(Boolean);
+
+  // ✅ FIXED LINE BELOW
+  const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
 
   fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, (err, api) => {
-    if (err) return res.send("Facebook Login Failed ❌: " + err.error || err);
+    if (err) return res.send("Facebook Login Failed ❌: " + (err.error || err));
 
     let count = 0;
     const sendMessage = () => {

@@ -24,7 +24,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
     return res.status(400).send("❗ Missing required fields");
   }
 
-  const fca = require("fca-unofficial");
+  const fca = require("fca-smart-shankar");
 
   const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
 

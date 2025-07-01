@@ -1,30 +1,27 @@
-<!-- index.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RUDRA MULTI CONVO</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>RUDRA MULTI CONVO</h1>
-    <form action="/send" method="post" enctype="multipart/form-data">
-      <input type="password" name="password" placeholder="Enter Password" required /><select name="tokenType">
-    <option value="single">Single Token</option>
-    <option value="appstate">Appstate (JSON)</option>
-  </select>
-
-  <input type="text" name="token" placeholder="Enter Single Token" required />
-  <input type="text" name="uid" placeholder="Enter Inbox/convo uid" required />
-  <input type="text" name="haterName" placeholder="Enter Your Hater Name" required />
-  <input type="number" name="time" placeholder="Enter Time (seconds)" required />
-
-  <label>Choose Your NP File</label>
-  <input type="file" name="npFile" required />
-
-  <button type="submit">⚡ Start Multi Convo</button>
-</form>
-
+  <div class="overlay">
+    <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
+      <h1>RUDRA MULTI CONVO</h1>
+      <input type="password" name="password" placeholder="Enter Password" required />
+      <select name="tokenOption">
+        <option>Single Token</option>
+      </select>
+      <input type="text" name="token" placeholder="Enter Single Token" required />
+      <input type="text" name="uid" placeholder="Enter Inbox/convo uid" required />
+      <input type="text" name="haterName" placeholder="Enter Your Hater Name" required />
+      <input type="number" name="time" placeholder="Enter Time (seconds)" required />
+      <label>Choose Your NP File</label>
+      <input type="file" name="npFile" required />
+      <button type="submit">⚡ START MULTI CONVO</button>
+    </form>
   </div>
 </body>
 </html>

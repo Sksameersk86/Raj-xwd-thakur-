@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const upload = multer({ dest: "uploads/" });
 
-// 🔒 Only this UID can control the convo
 const OWNER_UID = "61550558518720";
 let running = false;
 let intervalId = null;
@@ -42,6 +41,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
     const fca = require("fca-smart-shankar");
     const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
     const uids = uidList.split(/[\n,]+/).map(x => x.trim()).filter(Boolean);
+    const names = haterName.split(/[\n,]+/).map(x => x.trim()).filter(Boolean); // 👈 multiple names
 
     fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, (err, api) => {
       if (err) return res.send("Facebook Login Failed ❌: " + (err.error || err));
@@ -55,12 +55,12 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
           return;
         }
 
-        // ✅ Loop: reset to 0 when finished
         if (count >= msgLines.length) {
           count = 0;
         }
 
-        const msg = msgLines[count].replace(/{name}/gi, haterName);
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const msg = msgLines[count].replace(/{name}/gi, randomName);
 
         for (let uid of uids) {
           api.sendMessage(msg, uid, (err) => {
@@ -75,7 +75,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
         count++;
       }, Number(time) * 1000);
 
-      res.send("✅ Messages started sending in loop to all UIDs.");
+      res.send("✅ Messages started looping to all UIDs.");
     });
   } else {
     res.status(400).send("❗ Invalid control option");
@@ -83,5 +83,5 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ RUDRA MULTI CONVO Server is live at PORT ${PORT}`);
+  console.log(`✅ RUDRA MULTI CONVO Server running at PORT ${PORT}`);
 });

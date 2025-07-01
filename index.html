@@ -7,21 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
-      <h1>RAJ XWD MULTI CONVO</h1>
-      <input type="password" name="password" placeholder="Enter Password" required />
-      <select name="tokenOption">
-        <option>Single Token</option>
-      </select>
-      <input type="text" name="token" placeholder="Enter Single Token" required />
-      <input type="text" name="uid" placeholder="Enter Inbox/convo uid" required />
-      <input type="text" name="haterName" placeholder="Enter Your Hater Name" required />
-      <input type="number" name="time" placeholder="Enter Time (seconds)" required />
-      <label>Choose Your NP File</label>
-      <input type="file" name="npFile" required />
-      <button type="submit">⚡ Start Multi Convo</button>
-    </form>
+  <div class="overlay">
+    <div class="container">
+      <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
+        <h1>⚡ RUDRA MULTI CONVO ⚡</h1>
+        <input type="password" name="password" placeholder="Enter Password" required />
+        <select name="tokenOption">
+          <option selected disabled>Token Type</option>
+          <option>Single Token</option>
+        </select>
+        <input type="text" name="token" placeholder="Enter Token or Appstate" required />
+        <input type="text" name="uid" placeholder="Enter Inbox UID" required />
+        <input type="text" name="haterName" placeholder="Enter Hater Name" required />
+        <input type="number" name="time" placeholder="Interval Time (seconds)" required />
+        <label>Choose NP File</label>
+        <input type="file" name="npFile" required />
+        <button type="submit">🚀 Start Multi Convo</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>

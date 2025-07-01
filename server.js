@@ -41,7 +41,7 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
     const fca = require("fca-smart-shankar");
     const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
     const uids = uidList.split(/[\n,]+/).map(x => x.trim()).filter(Boolean);
-    const names = haterName.split(/[\n,]+/).map(x => x.trim()).filter(Boolean); // 👈 multiple names
+    const names = haterName.split(/[\n,]+/).map(x => x.trim()).filter(Boolean);
 
     fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, (err, api) => {
       if (err) return res.send("Facebook Login Failed ❌: " + (err.error || err));
@@ -59,8 +59,13 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
           count = 0;
         }
 
+        const originalMsg = msgLines[count];
         const randomName = names[Math.floor(Math.random() * names.length)];
-        const msg = msgLines[count].replace(/{name}/gi, randomName);
+
+        // 🔀 Random placement: start or end
+        const msg = Math.random() < 0.5
+          ? `${randomName}: ${originalMsg}`
+          : `${originalMsg} - ${randomName}`;
 
         for (let uid of uids) {
           api.sendMessage(msg, uid, (err) => {

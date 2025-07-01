@@ -1,85 +1,48 @@
-const express = require("express");
-const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
-const bodyParser = require("body-parser");
+// === server.js === const express = require("express"); const multer = require("multer"); const fs = require("fs"); const path = require("path"); const bodyParser = require("body-parser"); const fca = require("fca-smart-shankar");
 
-const app = express();
-const PORT = process.env.PORT || 10000;
+const app = express(); const PORT = process.env.PORT || 10000;
 
-const fca = require("fca-smart-shankar");
-const OWNER_UID = "61550558518720"; // <-- ये है तेरा OWNER UID
+app.use(bodyParser.urlencoded({ extended: true })); app.use(bodyParser.json()); app.use(express.static(__dirname));
 
 const upload = multer({ dest: "uploads/" });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static(__dirname));
+// Global send control let isSending = false; const OWNER_UID = "61550558518720";
 
-let threadMemory = {}; // हर ग्रुप का ON/OFF स्टेटस याद रखने के लिए
+app.post("/send", upload.single("npFile"), async (req, res) => { const { password, token, uidList, haterName, time, control, senderUID } = req.body;
 
-app.post("/send", upload.single("npFile"), async (req, res) => {
-  const { password, token, uid, haterName, time } = req.body;
+if (password !== "RUDRA") return res.status(401).send("❌ Incorrect Password"); if (senderUID !== OWNER_UID) return res.status(403).send("❌ Only owner can control");
 
-  if (password !== "RUDRA") return res.status(401).send("❌ Incorrect Password");
+if (control === "stop") { isSending = false; return res.send("🛑 Stopped by Owner"); }
 
-  if (!token || !uid || !haterName || !req.file)
-    return res.status(400).send("❗ Missing required fields");
+if (control === "start") { if (!token || !uidList || !haterName || !req.file || !time) { return res.status(400).send("❗ Missing required fields"); }
 
-  const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
+const msgLines = fs.readFileSync(req.file.path, "utf-8").split("\n").filter(Boolean);
+const uids = uidList.split(/[,\n]/).map(e => e.trim()).filter(Boolean);
 
-  fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, async (err, api) => {
-    if (err) return res.send("Facebook Login Failed ❌: " + (err.error || err));
+fca({ appState: token.startsWith("[") ? JSON.parse(token) : null, access_token: token }, (err, api) => {
+  if (err) return res.send("Facebook Login Failed ❌: " + (err.error || err));
+  isSending = true;
 
-    api.listenMqtt(async (err, event) => {
-      if (err || !event || !event.body) return;
-
-      const threadID = event.threadID;
-      const senderID = event.senderID;
-      const body = event.body.toLowerCase();
-
-      if (senderID === OWNER_UID) {
-        if (body === "+stop") {
-          threadMemory[threadID] = false;
-          api.sendMessage("🛑 Rudra convo *stopped* in this group.", threadID);
-        }
-        if (body === "+start") {
-          threadMemory[threadID] = true;
-          api.sendMessage("✅ Rudra convo *started* in this group.", threadID);
-        }
-        if (body === "+status") {
-          const status = threadMemory[threadID] ? "🟢 ON" : "🔴 OFF";
-          api.sendMessage(`📊 Status: ${status}`, threadID);
-        }
+  const loop = async () => {
+    for (const uid of uids) {
+      if (!isSending) return;
+      for (let line of msgLines) {
+        if (!isSending) return;
+        const msg = line.replace(/{name}/gi, haterName);
+        api.sendMessage(msg, uid, (err) => {
+          if (err) console.log("❌ Failed:", msg, "→", uid);
+          else console.log("✅ Sent:", msg, "→", uid);
+        });
+        await new Promise(r => setTimeout(r, Number(time) * 1000));
       }
+    }
+  };
 
-      // Only run convo if ON
-      if (!threadMemory[threadID]) return;
-    });
-
-    // Run once to start message delivery
-    let count = 0;
-    const sendMessage = () => {
-      if (count >= msgLines.length) return;
-      const msg = msgLines[count].replace(/{name}/gi, haterName);
-
-      api.sendMessage(msg, uid, (err) => {
-        if (err) {
-          console.log(`❌ Failed: ${msg} → ${uid}`, err);
-        } else {
-          console.log(`✅ Sent: ${msg} → ${uid}`);
-        }
-      });
-
-      count++;
-      setTimeout(sendMessage, Number(time) * 1000);
-    };
-
-    sendMessage();
-    res.send("✅ Messages sending started to UID: " + uid);
-  });
+  loop();
+  res.send("✅ Sending started to all UIDs");
 });
 
-app.listen(PORT, () => {
-  console.log("✅ RUDRA MULTI CONVO Server Running on PORT", PORT);
-});
+} else { return res.send("❓ Unknown control command"); } });
+
+app.listen(PORT, () => { console.log("✅ RUDRA MULTI CONVO Server Running on PORT", PORT); });
+

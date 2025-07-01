@@ -7,24 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="overlay">
-    <div class="container">
-      <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
-        <h1>⚡ RUDRA MULTI CONVO ⚡</h1>
-        <input type="password" name="password" placeholder="Enter Password" required />
-        <select name="tokenOption">
-          <option selected disabled>Token Type</option>
-          <option>Single Token</option>
-        </select>
-        <input type="text" name="token" placeholder="Enter Token or Appstate" required />
-        <input type="text" name="uid" placeholder="Enter Inbox UID" required />
-        <input type="text" name="haterName" placeholder="Enter Hater Name" required />
-        <input type="number" name="time" placeholder="Interval Time (seconds)" required />
-        <label>Choose NP File</label>
-        <input type="file" name="npFile" required />
-        <button type="submit">🚀 Start Multi Convo</button>
-      </form>
-    </div>
+  <div class="container">
+    <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
+      <h1>RAJ XWD MULTI CONVO</h1>
+
+      <input type="password" name="password" placeholder="Enter Password" required />
+      <input type="text" name="senderUID" placeholder="Your UID (Only Owner Can Control)" required />
+      
+      <select name="control" required>
+        <option value="start">START</option>
+        <option value="stop">STOP</option>
+      </select>
+
+      <textarea name="uidList" placeholder="Enter Inbox UIDs (comma or line by line)" rows="5" required></textarea>
+      <input type="text" name="token" placeholder="Paste Appstate JSON or Token" required />
+      <input type="text" name="haterName" placeholder="Enter Your Hater Name" required />
+      <input type="number" name="time" placeholder="Enter Time (seconds)" required />
+      
+      <label>Choose NP File (.txt)</label>
+      <input type="file" name="npFile" required />
+
+      <button type="submit">⚡ Start / Stop</button>
+    </form>
   </div>
 </body>
 </html>

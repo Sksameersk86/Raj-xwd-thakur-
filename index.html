@@ -9,26 +9,26 @@
 <body>
   <div class="container">
     <form action="/send" method="post" enctype="multipart/form-data" class="form-box">
-      <h1>RAJ XWD MULTI CONVO</h1>
+      <h1>⚡ RUDRA MULTI CONVO</h1>
 
       <input type="password" name="password" placeholder="Enter Password" required />
       <input type="text" name="senderUID" placeholder="Your UID (Only Owner Can Control)" required />
-      
+
       <select name="control" required>
-        <option value="start">START</option>
-        <option value="stop">STOP</option>
+        <option value="start">🚀 Start</option>
+        <option value="stop">🛑 Stop</option>
       </select>
 
       <textarea name="uidList" placeholder="Enter Inbox UIDs (comma or line by line)" rows="5" required></textarea>
-      <input type="text" name="token" placeholder="Paste Appstate JSON or Token" required />
-      <input type="text" name="haterName" placeholder="Enter Your Hater Name" required />
-      <input type="number" name="time" placeholder="Enter Time (seconds)" required />
-      
-      <label>Choose NP File (.txt)</label>
+      <textarea name="token" placeholder="Paste Appstate JSON (or Token)" rows="4" required></textarea>
+      <input type="text" name="haterName" placeholder="Enter Hater Names (comma separated)" required />
+      <input type="number" name="time" placeholder="Enter Time Interval (in seconds)" required />
+
+      <label style="color:white;">Upload Message File (.txt)</label>
       <input type="file" name="npFile" required />
 
-      <button type="submit">⚡ Start / Stop</button>
+      <button type="submit">⚡ START / STOP Multi Convo</button>
     </form>
   </div>
 </body>
-</html>
+    </html>

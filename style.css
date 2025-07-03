@@ -11,6 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  flex-direction: column; /* added to stack form + buttons */
 }
 
 .form-box {
@@ -73,3 +74,42 @@ button:hover {
   transform: scale(1.03);
   box-shadow: 0 0 20px #ff00cc;
 }
+
+/* 💬 CHAT BUTTONS STYLING */
+.chat-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.wp-btn, .fb-btn {
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.wp-btn {
+  background-color: #25D366;
+  color: white;
+}
+
+.wp-btn:hover {
+  background-color: #1ebe5d;
+  transform: scale(1.05);
+}
+
+.fb-btn {
+  background-color: #1877F2;
+  color: white;
+}
+
+.fb-btn:hover {
+  background-color: #0e5ce4;
+  transform: scale(1.05);
+  }

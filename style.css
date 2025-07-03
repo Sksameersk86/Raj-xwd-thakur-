@@ -22,8 +22,8 @@ body {
   width: 90%;
   max-width: 450px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(2px); /* Changed from 10px to 2px for less blur */
-  -webkit-backdrop-filter: blur(2px); /* Changed from 10px to 2px for less blur */
+  backdrop-filter: blur(2px); /* Keep this as is for less background blur */
+  -webkit-backdrop-filter: blur(2px); /* Keep this as is for less background blur */
 }
 
 h1 {
@@ -44,7 +44,7 @@ input, select, textarea, button {
 
 input, select, textarea {
   background-color: rgba(255, 255, 255, 0.08);
-  color: white;
+  color: white; /* Color of the text typed by the user */
   border: 1px solid #ffffff88;
 }
 
@@ -52,9 +52,13 @@ textarea {
   resize: vertical;
 }
 
-input::placeholder, textarea::placeholder {
-  color: #ddd;
+/* --- CHANGE STARTS HERE --- */
+/* Placeholder text color for better visibility */
+input::placeholder,
+textarea::placeholder {
+  color: #a0a0a0; /* Changed from #ddd to a darker grey */
 }
+/* --- CHANGE ENDS HERE --- */
 
 label {
   color: white;

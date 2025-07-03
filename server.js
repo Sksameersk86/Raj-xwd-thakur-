@@ -19,7 +19,7 @@ app.use(express.static(__dirname));
 app.post("/send", upload.single("npFile"), async (req, res) => {
   const { password, senderUID, control, token, uidList, haterName, time } = req.body;
 
-  if (password !== "RUDRA") {
+  if (password !== "16×8=JAAT") {
     return res.status(401).send("❌ Incorrect Password");
   }
 

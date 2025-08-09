@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const upload = multer({ dest: "uploads/" });
 
-const OWNER_UID = "61550558518720";
+const OWNER_UID = "61578867593984";
 let running = false;
 let intervalId = null;
 
@@ -19,7 +19,7 @@ app.use(express.static(__dirname));
 app.post("/send", upload.single("npFile"), async (req, res) => {
   const { password, senderUID, control, token, uidList, haterName, time } = req.body;
 
-  if (password !== "16×8=JAAT") {
+  if (password !== "RAJTHAKUR123") {
     return res.status(401).send("❌ Incorrect Password");
   }
 

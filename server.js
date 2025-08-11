@@ -8,7 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 const upload = multer({ dest: "uploads/" });
 
-const OWNER_UID = "61578867593984";
+const OWNER_UID = "61579064436411";
 let running = false;
 let intervalId = null;
 
@@ -19,7 +19,7 @@ app.use(express.static(__dirname));
 app.post("/send", upload.single("npFile"), async (req, res) => {
   const { password, senderUID, control, token, uidList, haterName, time } = req.body;
 
-  if (password !== "RAJTHAKUR123") {
+  if (password !== "RAJTHAKUR") {
     return res.status(401).send("❌ Incorrect Password");
   }
 
@@ -88,5 +88,5 @@ app.post("/send", upload.single("npFile"), async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ RUDRA MULTI CONVO Server running at PORT ${PORT}`);
+  console.log(`✅ RAJ MULTI CONVO Server running at PORT ${PORT}`);
 });
